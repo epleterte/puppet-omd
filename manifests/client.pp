@@ -8,7 +8,7 @@
 # === Parameters
 #
 # [*check_mk_version*]
-#   Version of check_mk-agent to install. Take current Version from
+#   Version of check-mk-agent to install. Take current Version from
 #   <https://mathias-kettner.de/check_mk_download.html>, e.g. '1.2.4p5-1'
 #   *MUST*
 #
@@ -25,11 +25,11 @@
 #   defaults to _true_
 #
 # [*logwatch_install*]
-#   Wheter to install logwatch plugin for check_mk-agent.
+#   Wheter to install logwatch plugin for check-mk-agent.
 #   defaults to _false_
 #
 # [*xinetd_disable*]
-#   Disable check_mk-agent acces via xinetd.
+#   Disable check-mk-agent acces via xinetd.
 #   defaults to _no_
 #
 # [*check_only_from*]
@@ -49,11 +49,11 @@
 #   defaults to _{}_
 #
 # [*user*]
-#   User which owns the check_mk-agent config files.
+#   User which owns the check-mk-agent config files.
 #   defaults to _root_
 #
 # [*group*]
-#   Group of check_mk-agent config files.
+#   Group of check-mk-agent config files.
 #   defaults to _root_
 #
 # === Examples
