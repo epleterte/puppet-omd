@@ -12,14 +12,14 @@ class omd::client::install {
 
         staging::file { $pkg_agent:
           source => "${download_source}/${pkg_agent}",
-          before => Package['check_mk-agent'],
+          before => Package['check-mk-agent'],
         }
 
         if $omd::client::logwatch_install {
 
           staging::file { $pkg_logwatch:
             source => "${download_source}/${pkg_logwatch}",
-            before => Package['check_mk-agent-logwatch'],
+            before => Package['check-mk-agent-logwatch'],
           }
 
         }
@@ -31,8 +31,8 @@ class omd::client::install {
       }
       'RedHat': {
 
-        $pkg_source_agent    = "${download_source}/check_mk-agent-${omd::client::check_mk_version}.noarch.rpm"
-        $pkg_source_logwatch = "${download_source}/check_mk-agent-logwatch-${omd::client::check_mk_version}.noarch.rpm"
+        $pkg_source_agent    = "${download_source}/check-mk-agent-${omd::client::check_mk_version}.noarch.rpm"
+        $pkg_source_logwatch = "${download_source}/check-mk-agent-logwatch-${omd::client::check_mk_version}.noarch.rpm"
         $pkg_provider        = 'rpm'
 
       }
@@ -54,7 +54,7 @@ class omd::client::install {
     mode   => '0755',
   }
 
-  package { 'check_mk-agent':
+  package { 'check-mk-agent':
     ensure   => installed,
     name     => $omd::client::package_name,
     source   => $pkg_source_agent,
@@ -63,12 +63,12 @@ class omd::client::install {
   }
 
   if $omd::client::logwatch_install {
-    package { 'check_mk-agent-logwatch':
+    package { 'check-mk-agent-logwatch':
       ensure   => installed,
       name     => "${omd::client::package_name}-logwatch",
       source   => $pkg_source_logwatch,
       provider => $pkg_provider,
-      require  => [ Package['check_mk-agent'],
+      require  => [ Package['check-mk-agent'],
                     File['/etc/check_mk'], ],
     }
 
