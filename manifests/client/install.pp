@@ -27,6 +27,7 @@ class omd::client::install {
         $pkg_source_agent    = "/opt/staging/omd/${pkg_agent}"
         $pkg_source_logwatch = "/opt/staging/omd/${pkg_logwatch}"
         $pkg_provider        = 'dpkg'
+        $pkg_ensure          = 'installed'
 
       }
       'RedHat': {
@@ -34,6 +35,7 @@ class omd::client::install {
         $pkg_source_agent    = "${download_source}/check-mk-agent-${omd::client::check_mk_version}.noarch.rpm"
         $pkg_source_logwatch = "${download_source}/check-mk-agent-logwatch-${omd::client::check_mk_version}.noarch.rpm"
         $pkg_provider        = 'rpm'
+        $pkg_ensure          = 'latest'
 
       }
       default: {
@@ -44,6 +46,7 @@ class omd::client::install {
     $pkg_source_agent    = undef
     $pkg_source_logwtach = undef
     $pkg_provider        = undef
+    $pkg_ensure          = 'installed'
   }
 
   # some packages (e.g. CentOS 7) do not create directory
@@ -54,8 +57,8 @@ class omd::client::install {
     mode   => '0755',
   }
 
-  package { 'check-mk-agent':
-    ensure   => installed,
+  package { 'check_mk-agent':
+    ensure   => $pkg_ensure,
     name     => $omd::client::package_name,
     source   => $pkg_source_agent,
     provider => $pkg_provider,
@@ -63,8 +66,8 @@ class omd::client::install {
   }
 
   if $omd::client::logwatch_install {
-    package { 'check-mk-agent-logwatch':
-      ensure   => installed,
+    package { 'check_mk-agent-logwatch':
+      ensure   => $pkg_ensure,
       name     => "${omd::client::package_name}-logwatch",
       source   => $pkg_source_logwatch,
       provider => $pkg_provider,
